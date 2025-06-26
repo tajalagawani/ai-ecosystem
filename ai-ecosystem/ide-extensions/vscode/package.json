@@ -1,0 +1,77 @@
+{
+  "name": "ai-agent-language",
+  "displayName": "AI Agent Language",
+  "description": "Complete support for .ai agent files - syntax highlighting, execution, debugging",
+  "version": "1.0.0",
+  "publisher": "ai-ecosystem",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": ["Programming Languages", "Other"],
+  "keywords": ["ai", "agent", "automation", "artificial intelligence"],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:ai-agent",
+    "onCommand:ai.execute",
+    "onCommand:ai.validate"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "ai-agent",
+      "aliases": ["AI Agent", "ai"],
+      "extensions": [".ai"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "ai-agent",
+      "scopeName": "source.ai-agent",
+      "path": "./syntaxes/ai-agent.tmGrammar.json"
+    }],
+    "commands": [
+      {
+        "command": "ai.execute",
+        "title": "Execute AI Agent",
+        "icon": "$(play)",
+        "category": "AI"
+      },
+      {
+        "command": "ai.validate",
+        "title": "Validate AI Agent",
+        "icon": "$(check)",
+        "category": "AI"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceExtname == .ai",
+          "command": "ai.execute",
+          "group": "navigation"
+        },
+        {
+          "when": "resourceExtname == .ai",
+          "command": "ai.validate",
+          "group": "navigation"
+        }
+      ]
+    },
+    "snippets": [
+      {
+        "language": "ai-agent",
+        "path": "./snippets/ai-agent.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "@types/node": "14.x",
+    "typescript": "^4.4.4"
+  },
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,118 @@
+{
+  "name": "AI Agent",
+  "scopeName": "source.ai-agent",
+  "fileTypes": ["ai"],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#sections"
+    },
+    {
+      "include": "#placeholders"
+    },
+    {
+      "include": "#env-variables"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#key-value-pairs"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.ai-agent",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "sections": {
+      "patterns": [
+        {
+          "name": "markup.heading.section.agent.ai-agent",
+          "match": "^\\s*\\[(agent)\\]\\s*$",
+          "captures": {
+            "1": {"name": "entity.name.section.agent.ai-agent"}
+          }
+        },
+        {
+          "name": "markup.heading.section.node.ai-agent",
+          "match": "^\\s*\\[(node:[^\\]]+)\\]\\s*$",
+          "captures": {
+            "1": {"name": "entity.name.section.node.ai-agent"}
+          }
+        },
+        {
+          "name": "markup.heading.section.ai-agent",
+          "match": "^\\s*\\[([^\\]]+)\\]\\s*$",
+          "captures": {
+            "1": {"name": "entity.name.section.ai-agent"}
+          }
+        }
+      ]
+    },
+    "placeholders": {
+      "patterns": [
+        {
+          "name": "markup.inserted.placeholder.ai-agent",
+          "match": "\\{\\{([^}]+)\\}\\}",
+          "captures": {
+            "1": {"name": "variable.parameter.ai-agent"}
+          }
+        }
+      ]
+    },
+    "env-variables": {
+      "patterns": [
+        {
+          "name": "markup.changed.env.ai-agent",
+          "match": "\\$\\{([^}]+)\\}",
+          "captures": {
+            "1": {"name": "variable.environment.ai-agent"}
+          }
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.triple.ai-agent",
+          "begin": "\"\"\"",
+          "end": "\"\"\"",
+          "patterns": [
+            {
+              "include": "#placeholders"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.ai-agent",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "include": "#placeholders"
+            }
+          ]
+        }
+      ]
+    },
+    "key-value-pairs": {
+      "patterns": [
+        {
+          "match": "^\\s*([^=\\s#]+)\\s*(=)\\s*(.*)$",
+          "captures": {
+            "1": {"name": "variable.key.ai-agent"},
+            "2": {"name": "keyword.operator.assignment.ai-agent"},
+            "3": {"name": "meta.value.ai-agent"}
+          }
+        }
+      ]
+    }
+  }
+}

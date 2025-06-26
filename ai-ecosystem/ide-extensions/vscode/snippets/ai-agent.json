@@ -1,0 +1,60 @@
+{
+  "Basic Agent Structure": {
+    "prefix": "agent",
+    "body": [
+      "[agent]",
+      "name = \"${1:My AI Agent}\"",
+      "description = \"${2:Agent description}\"",
+      "start_node = ${3:StartNode}",
+      "",
+      "[node:${3:StartNode}]",
+      "type = ${4:py}",
+      "label = \"${5:Start Node}\"",
+      "$0"
+    ],
+    "description": "Create a basic AI agent structure"
+  },
+  "Python Node": {
+    "prefix": "node-py",
+    "body": [
+      "[node:${1:NodeName}]",
+      "type = py",
+      "label = \"${2:Node Description}\"",
+      "code = \"\"\"",
+      "def ${3:function_name}():",
+      "    ${4:# Your Python code here}",
+      "    return {\"result\": \"${5:success}\"}",
+      "\"\"\"",
+      "function = ${3:function_name}",
+      "$0"
+    ],
+    "description": "Create a Python execution node"
+  },
+  "Gemini AI Node": {
+    "prefix": "node-gemini",
+    "body": [
+      "[node:${1:NodeName}]",
+      "type = gemini",
+      "label = \"${2:AI Processing}\"",
+      "api_key = \\${GEMINI_API_KEY}",
+      "model = \"gemini-1.5-pro-latest\"",
+      "prompt = \"${3:Your AI prompt here}\"",
+      "temperature = ${4:0.1}",
+      "$0"
+    ],
+    "description": "Create a Gemini AI node"
+  },
+  "Database Node": {
+    "prefix": "node-db",
+    "body": [
+      "[node:${1:NodeName}]",
+      "type = neon",
+      "label = \"${2:Database Operation}\"",
+      "connection_string = {{.Parameter.connection_string}}",
+      "operation = execute_query",
+      "query = \"${3:SELECT * FROM table}\"",
+      "$0"
+    ],
+    "description": "Create a database node"
+  }
+}

@@ -1,0 +1,30 @@
+[agent]
+name = "Test AI Agent"
+description = "A simple test agent"
+start_node = HelloWorld
+
+[parameters]
+greeting = "Hello"
+
+[node:HelloWorld]
+type = py
+label = "Say Hello"
+code = """
+def say_hello():
+    greeting = "{{.Parameter.greeting}}"
+    return {"message": f"{greeting}, World!"}
+"""
+function = say_hello
+
+[node:ProcessResult]
+type = gemini
+label = "Process with AI"
+api_key = ${GEMINI_API_KEY}
+model = "gemini-1.5-pro-latest"
+prompt = "Enhance this message: {{HelloWorld.result.message}}"
+
+[edges]
+HelloWorld = ProcessResult
+
+[env]
+GEMINI_API_KEY = ${GEMINI_API_KEY}
